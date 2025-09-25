@@ -1,0 +1,22 @@
+<div
+    hx-get="users"
+    hx-target="#users-data"
+    hx-trigger="every 2s"
+    hx-swap="outerHTML"
+>
+    {% for user in users %}
+    <table id="table-users">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="users-data">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
