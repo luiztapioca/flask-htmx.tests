@@ -4,16 +4,16 @@ from flask import Flask
 def create_app():
     app = Flask(__name__)
 
-    from .db import init_db
+    from . import db
 
-    init_db(app)
+    db.init_db(app)
 
     @app.cli.command("seed")
     def seeder():
         with app.app_context():
-            from .db.seeder import seed_db
+            from .db import seeder
 
-            seed_db()
+            seeder.seed_db()
 
     from app.blueprints.main.routes import main
 
