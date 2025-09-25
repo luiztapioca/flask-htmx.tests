@@ -8,6 +8,13 @@ def create_app():
 
     init_db(app)
 
+    @app.cli.command("seed")
+    def seeder():
+        with app.app_context():
+            from .db.seeder import seed_db
+
+            seed_db()
+
     from app.blueprints.main.routes import main
 
     app.register_blueprint(main, url_prefix="/")
