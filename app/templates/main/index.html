@@ -1,5 +1,28 @@
-{% extends "base.html" %} {% block title %}Index{% endblock %} {% block head %}
-{{ super() }}
+{% extends "main/base.html" %} {% block title %}Index{% endblock %} {% block
+head %} {{ super() }}
 <style type="text/css"></style>
-{% endblock %} {% block content %} {% include 'main/partials/table.html' %} {%
-endblock %}
+{% endblock %} {% block content %}
+<div>
+    <table
+        hx-get="/users?page={{ page + 1 }}"
+        hx-target="this"
+        hx-trigger="every 0.5s"
+        hx-swap="outerHTML"
+    >
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>username</th>
+            </tr>
+        </thead>
+        {% for user in users %}
+        <tbody>
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
